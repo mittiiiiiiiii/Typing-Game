@@ -11,7 +11,7 @@ Reactを使用して作成
 アルバイトの研修で作ったものなのでまだ改善の余地があります・・・
 
 ## Deploy
-![Webアプリ版](https://typing-game-f6a11.web.app)
+[Webアプリ版](https://typing-game-f6a11.web.app)
 
 ## UI
 ![画面遷移図](./UI/コンポーネント.png)
