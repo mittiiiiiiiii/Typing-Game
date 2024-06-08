@@ -2,7 +2,7 @@
 
 [![My Skills](https://skillicons.dev/icons?i=js,react,yarn,css,vscode)](https://skillicons.dev)
 
-# 概要
+## 概要
 数字と記号のタイピングゲーム
 経過時間、正しく打ったキーの数、平均キータイプ数、ミスタイプ数、正確率を記録
 
