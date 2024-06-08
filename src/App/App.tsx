@@ -4,8 +4,8 @@ import Start from '../Routes/Start/index';
 import Game from '../Routes/Game/index';
 import Result from '../Routes/Result/index';
 
-function App() {
-    const [gameStarted, setGameStarted] = useState(false);
+const App: React.FC = () =>  {
+    const [gameStarted,setGameStarted]=useState<boolean>(false);
 
     return (
         <BrowserRouter>

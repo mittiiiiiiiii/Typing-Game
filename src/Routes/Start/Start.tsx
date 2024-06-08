@@ -2,12 +2,17 @@ import React from 'react';
 import styled,{ createGlobalStyle } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-// コンポーネント定義
-const Start = ({ setGameStarted }) => {
+//Propsの型定義
+interface StartProps {
+  setGameStarted: (gameStarted: boolean) => void;
+}
+
+//コンポーネント定義
+const Start: React.FC<StartProps> = ({ setGameStarted }) => {
   const navigate=useNavigate();
 
   //Gameコンポーネントに遷移
-  const handlePlayButtonClick = () => {
+  const handlePlayButtonClick = (): void => {
     setGameStarted(true);
     navigate('/game');
   };
@@ -21,7 +26,7 @@ const Start = ({ setGameStarted }) => {
             <BlackBoxContainer>
               <Title data-testid="title-label">NS-TYPING</Title>
               <Description>数字・記号専用のタイピング練習ゲーム</Description>
-              <PlayButton onClick={handlePlayButtonClick}>プレイする</PlayButton>
+              <PlayButton onClick={handlePlayButtonClick as () => void}>プレイする</PlayButton>
             </BlackBoxContainer>
         </Container>
     </>
@@ -30,7 +35,7 @@ const Start = ({ setGameStarted }) => {
 
 export default Start;
 
-// グローバルスタイルを追加
+//グローバルスタイルを追加
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;

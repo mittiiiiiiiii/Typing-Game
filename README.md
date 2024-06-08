@@ -1,6 +1,6 @@
 # Typing Game
 
-[![My Skills](https://skillicons.dev/icons?i=js,react,yarn,css,vscode)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,ts,react,yarn,css,vscode)](https://skillicons.dev)
 
 ## 概要
 数字と記号のタイピングゲーム
@@ -18,6 +18,7 @@ Reactを使用して作成
 ## アプリを作成
 - フォルダ構造を整理
 - 直接gameやresultへのアクセスを禁止
+- TSに変更
 - Startコンポーネントの実装
     - 基本的なレイアウトを作成
     - Gameコンポーネントへ遷移する機能を実装

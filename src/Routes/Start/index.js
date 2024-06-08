@@ -1,1 +1,1 @@
-export { default } from './Start.jsx'
+export { default } from './Start.tsx'
