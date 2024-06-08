@@ -87,8 +87,9 @@ const Game: React.FC<GameProps> = ({ gameStarted }) => {
                         <Header data-testid="header-label">NS-TYPING</Header>
                         <BlackBoxContainer>
                             <InstructionText>表示された数字または記号のキーを押してください</InstructionText>
-                            <SymbolDisplay>{currentSymbol}</SymbolDisplay>
-                            <QuestionStats>問題数: {questionCount}<br/><br/><br/>正解数: {correctCount}</QuestionStats>
+                            <SymbolDisplay data-testid="current-symbol">{currentSymbol}</SymbolDisplay>
+                            <QuestionStats>問題数: {questionCount}<br/><br/><br/>
+                            <span data-testid="correct-count">正解数: {correctCount}</span></QuestionStats>
                             <ReturnButton onClick={handlePlayButtonClick as () => void}>タイトルに戻る</ReturnButton>
                         </BlackBoxContainer>
                 </Container>
