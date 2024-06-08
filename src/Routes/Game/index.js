@@ -1,1 +1,1 @@
-export { default } from './Game.jsx'
+export { default } from './Game.tsx'

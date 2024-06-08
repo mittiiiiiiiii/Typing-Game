@@ -2,49 +2,54 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-const symbols = ['@','#','$','%','&','*','!','?','+','=','<','>','/','\\','|','^','~','`','_','-','(',')','{','}','[',']','.',',',';',':','"',"'",'0','1','2','3','4','5','6','7','8','9'];
+const symbols: string[]=['@','#','$','%','&','*','!','?','+','=','<','>','/','\\','|','^','~','`','_','-','(',')','{','}','[',']','.',',',';',':','"',"'",'0','1','2','3','4','5','6','7','8','9'];
 
-// コンポーネント定義
-const Game = ({ gameStarted }) => {
-    const navigate = useNavigate();
-    const [currentSymbol,setCurrentSymbol]=useState('');
-    const [questionCount,setQuestionCount]=useState(0);
-    const [correctCount,setCorrectCount]=useState(0);
-    const [mistypeCount,setMistypeCount]=useState(0);
-    const [elapsedTime,setElapsedTime]=useState(0);
+//Propsの型定義
+type GameProps = {
+    gameStarted: boolean;
+};
 
-    // 不正なアクセスをブロック
+//コンポーネント定義
+const Game: React.FC<GameProps> = ({ gameStarted }) => {
+    const navigate=useNavigate();
+    const [currentSymbol,setCurrentSymbol]=useState<string>('');
+    const [questionCount,setQuestionCount]=useState<number>(0);
+    const [correctCount,setCorrectCount]=useState<number>(0);
+    const [mistypeCount,setMistypeCount]=useState<number>(0);
+    const [elapsedTime,setElapsedTime]=useState<number>(0);
+
+    //不正なアクセスをブロック
     useEffect(() => {
         if (!gameStarted) {
         navigate('/');
         }
     },[gameStarted,navigate]);
 
-    // ゲーム開始時の処理
+    //ゲーム開始時の処理
     useEffect(() => {
-        const start=new Date();
-        const newTimer=setInterval(() => {
-                const now = new Date();
-                setElapsedTime(Math.floor((now-start)/1000));
+        const start: Date=new Date();
+        const newTimer: NodeJS.Timeout=setInterval(() => {
+                const now: Date=new Date();
+                setElapsedTime(Math.floor((now.getTime() - start.getTime())/1000));
             }, 1000);
         return () => clearInterval(newTimer);
     },[]);
 
-    // ランダムな記号を選択
+    //ランダムな記号を選択
     useEffect(() => {
         setCurrentSymbol(symbols[Math.floor(Math.random()*symbols.length)]);
     },[questionCount]);
 
-    // キーイベントのハンドラー
-    const handleKeyPress=useCallback((event) => {
+    //キーイベントのハンドラー
+    const handleKeyPress=useCallback((event: KeyboardEvent) => {
         if (event.key===currentSymbol) {
             setCorrectCount(correctCount+1);
         if (questionCount<9) {
             setQuestionCount(questionCount+1);
         } else if (questionCount===9) {
-            const totalTime=elapsedTime;
-            const accuracy=(((correctCount+1)/(correctCount+mistypeCount+1))*100);
-            const averageKeystrokes=totalTime/(correctCount+mistypeCount+1);
+            const totalTime: number=elapsedTime;
+            const accuracy: number=(((correctCount+1)/(correctCount+mistypeCount+1))*100);
+            const averageKeystrokes: number=totalTime/(correctCount+mistypeCount+1);
             navigate('/result', {
             state: {
                 elapsedTime: totalTime,
@@ -60,16 +65,16 @@ const Game = ({ gameStarted }) => {
         }
     },[currentSymbol,correctCount,mistypeCount,questionCount,navigate,elapsedTime]);
 
-    // キーイベントのリスナーを追加するためのuseEffect
+    //キーイベントのリスナーを追加するためのuseEffect
     useEffect(() => {
-        window.addEventListener('keypress',handleKeyPress);
+        window.addEventListener('keypress',handleKeyPress as () => KeyboardEvent);
         return () => {
-            window.removeEventListener('keypress',handleKeyPress);
+            window.removeEventListener('keypress',handleKeyPress as () => KeyboardEvent);
         };
     },[handleKeyPress]);
 
     //Startコンポーネントに遷移
-    const handlePlayButtonClick = () => {
+    const handlePlayButtonClick = (): void => {
         navigate('/');
     };
 
@@ -83,7 +88,7 @@ const Game = ({ gameStarted }) => {
                             <InstructionText>表示された数字または記号のキーを押してください</InstructionText>
                             <SymbolDisplay>{currentSymbol}</SymbolDisplay>
                             <QuestionStats>問題数: {questionCount}<br/><br/><br/>正解数: {correctCount}</QuestionStats>
-                            <ReturnButton onClick={handlePlayButtonClick}>タイトルに戻る</ReturnButton>
+                            <ReturnButton onClick={handlePlayButtonClick as () => void}>タイトルに戻る</ReturnButton>
                         </BlackBoxContainer>
                 </Container>
         </>
@@ -92,7 +97,7 @@ const Game = ({ gameStarted }) => {
 
 export default Game;
 
-// グローバルスタイルを追加
+//グローバルスタイルを追加
 const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;

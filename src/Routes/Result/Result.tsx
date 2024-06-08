@@ -2,27 +2,40 @@ import React ,{ useEffect,useState } from 'react';
 import styled,{ createGlobalStyle } from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-// コンポーネント定義
-const Result = ({ gameStarted }) => {
-    const navigate=useNavigate();
-    const location=useLocation();
-    const [state, setState] = useState({ elapsedTime: 0, correctCount: 0, mistypeCount: 0, accuracy: 0, averageKeystrokes: 0 });
+//Propsの型定義
+type ResultProps = {
+    gameStarted: boolean;
+};
+
+type State = {
+    elapsedTime: number;
+    correctCount: number;
+    mistypeCount: number;
+    accuracy: number;
+    averageKeystrokes: number;
+};
+
+//コンポーネント定義
+const Result: React.FC<ResultProps> = ({ gameStarted }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [state, setState] = useState<State>({ elapsedTime: 0,correctCount: 0,mistypeCount: 0,accuracy: 0,averageKeystrokes: 0 });
 
     //不正なアクセスを禁止する
     useEffect(() => {
-        if (!gameStarted || !location.state) {
+        if (!gameStarted||!location.state) {
             navigate('/');
         } else {
-            setState(location.state);
+            setState(location.state as State);
         }
     },[gameStarted,location.state,navigate]);
 
-    // 数値を小数点第一位までに丸める
-    const formattedAverageKeystrokes=Number(state.averageKeystrokes).toFixed(1);
-    const formattedAccuracy=Number(state.accuracy).toFixed(1);
+    //数値を小数点第一位までに丸める
+    const formattedAverageKeystrokes: string=Number(state.averageKeystrokes).toFixed(1);
+    const formattedAccuracy: string=Number(state.accuracy).toFixed(1);
 
     //Startコンポーネントに遷移
-    const handlePlayButtonClick = () => {
+    const handlePlayButtonClick = (): void => {
         navigate('/');
     };
 
