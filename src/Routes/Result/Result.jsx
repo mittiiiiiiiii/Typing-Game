@@ -1,23 +1,25 @@
-import React ,{useEffect,} from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import React ,{ useEffect,useState } from 'react';
+import styled,{ createGlobalStyle } from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 // コンポーネント定義
 const Result = ({ gameStarted }) => {
     const navigate=useNavigate();
     const location=useLocation();
-    const { elapsedTime=0,correctCount=0,mistypeCount=0,accuracy=0,averageKeystrokes=0 }=location.state;
+    const [state, setState] = useState({ elapsedTime: 0, correctCount: 0, mistypeCount: 0, accuracy: 0, averageKeystrokes: 0 });
 
     //不正なアクセスを禁止する
     useEffect(() => {
         if (!gameStarted || !location.state) {
             navigate('/');
+        } else {
+            setState(location.state);
         }
     },[gameStarted,location.state,navigate]);
 
     // 数値を小数点第一位までに丸める
-    const formattedAverageKeystrokes=Number(averageKeystrokes).toFixed(1);
-    const formattedAccuracy=Number(accuracy).toFixed(1);
+    const formattedAverageKeystrokes=Number(state.averageKeystrokes).toFixed(1);
+    const formattedAccuracy=Number(state.accuracy).toFixed(1);
 
     //Startコンポーネントに遷移
     const handlePlayButtonClick = () => {
@@ -33,10 +35,10 @@ const Result = ({ gameStarted }) => {
                         <BlackBoxContainer>
                             <ResultTitle>結果</ResultTitle>
                             <TextInfo>
-                                ・経過時間: <GreenText>{elapsedTime}秒<br/></GreenText>
-                                ・正しく打ったキーの数: <GreenText>{correctCount}<br/></GreenText>
+                                ・経過時間: <GreenText>{state.elapsedTime}秒<br/></GreenText>
+                                ・正しく打ったキーの数: <GreenText>{state.correctCount}<br/></GreenText>
                                 ・平均キータイプ数: <GreenText>{formattedAverageKeystrokes}</GreenText>回/秒<br/>
-                                ・ミスタイプ数: <GreenText>{mistypeCount}<br/></GreenText>
+                                ・ミスタイプ数: <GreenText>{state.mistypeCount}<br/></GreenText>
                                 ・正確率: <GreenText>{formattedAccuracy}</GreenText>%
                             </TextInfo>
                             <ReturnButton onClick={handlePlayButtonClick}>タイトルに戻る</ReturnButton>
