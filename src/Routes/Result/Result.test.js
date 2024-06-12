@@ -6,7 +6,7 @@ import Result from './Result';
 import Game from '../Game/index';
 import Start from '../Start/index'
 
-// テスト用の初期データ
+//テスト用の初期データ
 const initialState = {
     elapsedTime: "00:14:26",
     correctCount: 10,
@@ -23,7 +23,7 @@ describe('Result コンポーネント',() => {
             </MemoryRouter>
         );
 
-        //Header のテキストをテスト
+        //Headerのテキストをテスト
         const headerLabel = screen.getByTestId('header-label');
         expect(headerLabel).toBeInTheDocument();
         expect(headerLabel).toBeVisible();
@@ -69,7 +69,7 @@ describe('Result コンポーネント',() => {
             fireEvent.keyPress(screen.getByTestId('current-symbol'), { key: currentSymbol });
         }
 
-        // Result コンポーネントに遷移後の表示を確認
+        //Result コンポーネントに遷移後の表示を確認
         await waitFor(() => {
             expect(screen.getByText('結果')).toBeInTheDocument();
         });

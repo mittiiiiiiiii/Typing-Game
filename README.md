@@ -10,6 +10,20 @@ Reactを使用して作成
 
 アルバイトの研修で作ったものなのでまだ改善の余地があります・・・
 
+## コマンド
+- リポジトリのクローン
+    ```
+    https://github.com/mittiiiiiiiii/Typing-Game.git
+    ```
+- ローカルホストの起動
+    ```
+    yarn start
+    ```
+- テストを実行
+    ```bash
+    yarn test
+    ```
+
 ## Deploy
 [Webアプリ版](https://typing-game-f6a11.web.app)
 
