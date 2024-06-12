@@ -78,7 +78,7 @@ describe('Game コンポーネント',() => {
             </Router>
         );
 
-        //Game コンポーネントに遷移
+        //Gameコンポーネントに遷移
         fireEvent.click(screen.getByText('プレイする'));
 
         fireEvent.click(screen.getByText('タイトルに戻る'));

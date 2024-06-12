@@ -9,19 +9,19 @@ describe('Start コンポーネント',() => {
     test('期待されたテキストで正しくレンダリングされる',() => {
         render(<Router><Start /></Router>);
 
-        //Header のテキストをテスト
+        //Headerのテキストをテスト
         const headerLabel=screen.getByTestId('header-label');
         expect(headerLabel).toBeInTheDocument();
         expect(headerLabel).toBeVisible();
         expect(headerLabel).toHaveTextContent('NS-TYPING');
 
-        //Title のテキストをテスト
+        //Titleのテキストをテスト
         const titleLabel=screen.getByTestId('title-label');
         expect(titleLabel).toBeInTheDocument();
         expect(titleLabel).toBeVisible();
         expect(titleLabel).toHaveTextContent('NS-TYPING');
-
-        //Description のテキストをテスト
+        
+        //Descriptionのテキストをテスト
         const descriptionText=screen.getByText('数字・記号専用のタイピング練習ゲーム');
         expect(descriptionText).toBeInTheDocument();
         expect(descriptionText).toBeVisible();
@@ -48,7 +48,7 @@ describe('Start コンポーネント',() => {
         const playButton=screen.getByText('プレイする');
         fireEvent.click(playButton);
 
-        //Game コンポーネントの特定の要素が表示されるまで待機
+        //Gameコンポーネントの特定の要素が表示されるまで待機
         await waitFor(() => {
             const gameInstructionText=screen.getByText('表示された数字または記号のキーを押してください');
             expect(gameInstructionText).toBeInTheDocument();
