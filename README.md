@@ -13,7 +13,7 @@ Reactを使用して作成
 ## コマンド
 - リポジトリのクローン
     ```
-    https://github.com/mittiiiiiiiii/Typing-Game.git
+    git clone https://github.com/mittiiiiiiiii/Typing-Game.git
     ```
 - ローカルホストの起動
     ```
